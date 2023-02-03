@@ -1,0 +1,41 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# macrocharts
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of macrocharts is to help macroeconomics students to understand effects of the IS-LM model.
+
+## Installation
+
+You can install the development version of macrocharts from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("m-pereira/stock-cluster-analysis")
+```
+
+## Example
+
+This is a basic example which shows you how create a IS-LM :
+
+```{r example}
+## load the package
+#library(macrocharts)
+## create a shiny app with the 
+#chart_IS_LM()
+```
