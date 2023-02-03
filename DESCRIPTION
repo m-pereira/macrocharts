@@ -12,7 +12,9 @@ LazyData: true
 Imports: 
     dplyr,
     ggplot2,
+    ggthemes,
     magrittr,
     shiny,
     shinydashboard,
     shinythemes
+RoxygenNote: 7.2.3

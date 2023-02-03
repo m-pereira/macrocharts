@@ -1,15 +1,13 @@
 
 
 #' Create a shiny app with IS-LM chart
-#' @param
 #' @importFrom magrittr "%>%"
 #' @import dplyr
 #' @import ggplot2
 #' @import shiny
 #' @import shinythemes
 #' @import shinydashboard
-#' @return
-#' @export
+#' @import ggthemes
 #'
 #' @examples
 #' chart_IS_LM()
@@ -157,7 +155,7 @@ chart_IS_LM <- function() {
       res$DATA2 |>
       ggplot2::ggplot(
         ggplot2::aes(x = vari, y = vari2, fill = ID, group = ID)) +
-        ggplot2::geom_line(size = 1.5) +
+        ggplot2::geom_line(linewidth = 1.5) +
         ggplot2::geom_line(ggplot2::aes(colour = ID)) +
         ggplot2::labs(x = "Renda", y = "Taxa de juros") +
         ggplot2::scale_colour_discrete("Modelo") +
@@ -170,7 +168,7 @@ chart_IS_LM <- function() {
       dplyr::filter(res$DATA2, ID %in% c("LM'", "IS'")) |>
       ggplot2::ggplot(
       ggplot2::aes(x = vari, y = vari2, fill = ID, group = ID)) +
-        ggplot2::geom_line(size = 1.5) +
+        ggplot2::geom_line(linewidth = 1.5) +
         ggplot2::geom_line(ggplot2::aes(colour = ID)) +
         ggplot2::labs(x = "Renda", y = "Taxa de juros") +
         ggplot2::scale_colour_discrete("Modelo") +
@@ -186,3 +184,5 @@ chart_IS_LM <- function() {
   # Run the application
   shiny::shinyApp(ui, server)
 }
+
+
