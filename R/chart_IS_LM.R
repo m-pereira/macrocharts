@@ -8,7 +8,7 @@
 #' @import shinythemes
 #' @import shinydashboard
 #' @import ggthemes
-#'
+#' @export
 #' @examples
 #' chart_IS_LM()
 #'
