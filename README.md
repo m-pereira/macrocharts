@@ -16,7 +16,7 @@ You can install the development version of macrocharts from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("m-pereira/stock-cluster-analysis")
+devtools::install_github("m-pereira/macrocharts")
 ```
 
 ## Example
