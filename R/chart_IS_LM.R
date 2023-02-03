@@ -19,7 +19,7 @@ chart_IS_LM <- function() {
 
   # Define UI for application that draws a histogram
   ui <- shiny::fluidPage(
-    theme = shinythemes::shinytheme("superhero"),
+    theme = shinythemes::shinytheme("cerulean"),
 
     # Application title
     shiny::titlePanel("Modelo macroeconomico IS-LM"),
