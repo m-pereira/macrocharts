@@ -25,25 +25,25 @@ chart_IS_LM <- function() {
     shiny::titlePanel("Modelo macroeconomico IS-LM"),
     shiny::fluidRow(shiny::column(12, shiny::h4("Parametros do modelo IS-LM sem mudanca"))),
     shiny::fluidRow(
-      shiny::column(1, shiny::sliderInput("c1", "PMC", value = 0.8, min = 0, max = 1)), # propensao marginal a consumir
-      shiny::column(1, shiny::sliderInput("t1", "IR", value = 0.25, min = 0, max = 1)), # Imposto de renda proporcional
-      shiny::column(2, shiny::sliderInput("I_01", "Investimento Autonomo(I_0)", value = 900, min = 0, max = 2000)),
-      shiny::column(2, shiny::sliderInput("b1", "Sensibilidade Investimento(b)", value = 50, min = 0, max = 100)),
-      shiny::column(2, shiny::sliderInput("G1", "Gastos Autonomo", value = 800, min = 0, max = 1600)),
-      shiny::column(1, shiny::sliderInput("k1", "SDSRNR(k)", value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
-      shiny::column(1, shiny::sliderInput("h1", "SDSRTJ(h)", value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
-      shiny::column(2, shiny::sliderInput("MP1", "oferta real de moeda (M/P)", value = 500, min = 0, max = 1000)) # oferta real de moeda
+      shiny::column(1, shiny::sliderInput("c1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{c}$$"), value = 0.8, min = 0, max = 1)), # propensao marginal a consumir
+      shiny::column(1, shiny::sliderInput("t1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{t}$$"), value = 0.25, min = 0, max = 1)), # Imposto de renda proporcional
+      shiny::column(2, shiny::sliderInput("I_01",shiny::withMathJax("$$\\hspace{2cm} I_0$$"), value = 900, min = 0, max = 2000)),
+      shiny::column(2, shiny::sliderInput("b1",  shiny::withMathJax("$$\\hspace{2cm}\\textbf{b}$$"), value = 50, min = 0, max = 100)),
+      shiny::column(2, shiny::sliderInput("G1",  shiny::withMathJax("$$\\hspace{2cm} G_0$$"), value = 800, min = 0, max = 1600)),
+      shiny::column(1, shiny::sliderInput("k1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{k}$$"), value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
+      shiny::column(1, shiny::sliderInput("h1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{h}$$"), value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
+      shiny::column(2, shiny::sliderInput("MP1", shiny::withMathJax("$$\\hspace{2cm}\\bar{M}/P$$"), value = 500, min = 0, max = 1000)) # oferta real de moeda
     ),
     shiny::fluidRow(shiny::column(12, shiny::h4("Parametros do modelo IS-LM com mudanca"))),
     shiny::fluidRow(
-      shiny::column(1, shiny::sliderInput("c", "PMC (c)", value = 0.8, min = 0, max = 1)), # propensao marginal a consumir
-      shiny::column(1, shiny::sliderInput("t", "IR(t)", value = 0.25, min = 0, max = 1)), # Imposto de renda proporcional
-      shiny::column(2, shiny::sliderInput("I_0", "Investimento Autonomo(I_0)", value = 900, min = 0, max = 2000)),
-      shiny::column(2, shiny::sliderInput("b", "Sensibilidade Investimento(b)", value = 50, min = 0, max = 100)),
-      shiny::column(2, shiny::sliderInput("G", "Gastos Autonomo", value = 800, min = 0, max = 1600)),
-      shiny::column(1, shiny::sliderInput("k", "SDSRNR(k)", value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
-      shiny::column(1, shiny::sliderInput("h", "SDSRTJ(h)", value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
-      shiny::column(2, shiny::sliderInput("MP", "oferta real de moeda (M/P)", value = 500, min = 0, max = 1000)) # oferta real de moeda
+      shiny::column(1, shiny::sliderInput("c",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{c}$$"), value = 0.8, min = 0, max = 1)),
+      shiny::column(1, shiny::sliderInput("t",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{t}$$"), value = 0.25, min = 0, max = 1)),
+      shiny::column(2, shiny::sliderInput("I_0", shiny::withMathJax("$$\\hspace{2cm} I_0$$"), value = 900, min = 0, max = 2000)),
+      shiny::column(2, shiny::sliderInput("b",   shiny::withMathJax("$$\\hspace{2cm}\\textbf{b}$$"), value = 50, min = 0, max = 100)),
+      shiny::column(2, shiny::sliderInput("G",   shiny::withMathJax("$$\\hspace{2cm} G_0$$"), value = 800, min = 0, max = 1600)),
+      shiny::column(1, shiny::sliderInput("k",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{k}$$"), value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
+      shiny::column(1, shiny::sliderInput("h",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{h}$$"), value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
+      shiny::column(2, shiny::sliderInput("MP",  shiny::withMathJax("$$\\hspace{2cm}\\bar{M}/P$$"), value = 500, min = 0, max = 1000)) # oferta real de moeda
     ),
     shiny::tabsetPanel(
       shiny::tabPanel(
