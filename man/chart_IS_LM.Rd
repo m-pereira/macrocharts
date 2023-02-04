@@ -9,7 +9,3 @@ chart_IS_LM()
 \description{
 Create a shiny app with IS-LM chart
 }
-\examples{
-chart_IS_LM()
-
-}

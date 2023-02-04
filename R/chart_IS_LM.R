@@ -9,13 +9,9 @@
 #' @import shinydashboard
 #' @import ggthemes
 #' @export
-#' @examples
-#' chart_IS_LM()
 #'
 chart_IS_LM <- function() {
   time <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2)
-
-
 
   # Define UI for application that draws a histogram
   ui <- shiny::fluidPage(
