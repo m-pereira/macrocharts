@@ -6,6 +6,9 @@
 \usage{
 chart_IS_LM()
 }
+\value{
+a shiny app
+}
 \description{
 Create a shiny app with IS-LM chart
 }
