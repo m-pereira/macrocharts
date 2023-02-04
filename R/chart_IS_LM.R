@@ -14,8 +14,7 @@
 
 #'
 chart_IS_LM <- function() {
-  time <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2)
-
+  time <- seq(from = .1,to = 2,by = .1)
   # Define UI for application that draws a histogram
   ui <- shiny::fluidPage(
     theme = shinythemes::shinytheme("cerulean"),
@@ -24,25 +23,25 @@ chart_IS_LM <- function() {
     shiny::titlePanel("Modelo macroeconomico IS-LM"),
     shiny::fluidRow(shiny::column(12, shiny::h4("Parametros do modelo IS-LM sem mudanca"))),
     shiny::fluidRow(
-      shiny::column(1, shiny::sliderInput("c1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{c}$$"), value = 0.8, min = 0, max = 1)), # propensao marginal a consumir
-      shiny::column(1, shiny::sliderInput("t1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{t}$$"), value = 0.25, min = 0, max = 1)), # Imposto de renda proporcional
-      shiny::column(2, shiny::sliderInput("I_01",shiny::withMathJax("$$\\hspace{2cm} I_0$$"), value = 900, min = 0, max = 2000)),
-      shiny::column(2, shiny::sliderInput("b1",  shiny::withMathJax("$$\\hspace{2cm}\\textbf{b}$$"), value = 50, min = 0, max = 100)),
-      shiny::column(2, shiny::sliderInput("G1",  shiny::withMathJax("$$\\hspace{2cm} G_0$$"), value = 800, min = 0, max = 1600)),
-      shiny::column(1, shiny::sliderInput("k1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{k}$$"), value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
-      shiny::column(1, shiny::sliderInput("h1",  shiny::withMathJax("$$\\hspace{1cm}\\textbf{h}$$"), value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
+      shiny::column(1, shiny::sliderInput("c1", shiny::withMathJax("$$\\hspace{1cm}\\textbf{c}$$"), value = 0.8, min = 0, max = 1)), # propensao marginal a consumir
+      shiny::column(1, shiny::sliderInput("t1", shiny::withMathJax("$$\\hspace{1cm}\\textbf{t}$$"), value = 0.25, min = 0, max = 1)), # Imposto de renda proporcional
+      shiny::column(2, shiny::sliderInput("I_01", shiny::withMathJax("$$\\hspace{2cm} I_0$$"), value = 900, min = 0, max = 2000)),
+      shiny::column(2, shiny::sliderInput("b1", shiny::withMathJax("$$\\hspace{2cm}\\textbf{b}$$"), value = 50, min = 0, max = 100)),
+      shiny::column(2, shiny::sliderInput("G1", shiny::withMathJax("$$\\hspace{2cm} G_0$$"), value = 800, min = 0, max = 1600)),
+      shiny::column(1, shiny::sliderInput("k1", shiny::withMathJax("$$\\hspace{1cm}\\textbf{k}$$"), value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
+      shiny::column(1, shiny::sliderInput("h1", shiny::withMathJax("$$\\hspace{1cm}\\textbf{h}$$"), value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
       shiny::column(2, shiny::sliderInput("MP1", shiny::withMathJax("$$\\hspace{2cm}\\bar{M}/P$$"), value = 500, min = 0, max = 1000)) # oferta real de moeda
     ),
     shiny::fluidRow(shiny::column(12, shiny::h4("Parametros do modelo IS-LM com mudanca"))),
     shiny::fluidRow(
-      shiny::column(1, shiny::sliderInput("c",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{c}$$"), value = 0.8, min = 0, max = 1)),
-      shiny::column(1, shiny::sliderInput("t",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{t}$$"), value = 0.25, min = 0, max = 1)),
+      shiny::column(1, shiny::sliderInput("c", shiny::withMathJax("$$\\hspace{1cm}\\textbf{c}$$"), value = 0.8, min = 0, max = 1)),
+      shiny::column(1, shiny::sliderInput("t", shiny::withMathJax("$$\\hspace{1cm}\\textbf{t}$$"), value = 0.25, min = 0, max = 1)),
       shiny::column(2, shiny::sliderInput("I_0", shiny::withMathJax("$$\\hspace{2cm} I_0$$"), value = 900, min = 0, max = 2000)),
-      shiny::column(2, shiny::sliderInput("b",   shiny::withMathJax("$$\\hspace{2cm}\\textbf{b}$$"), value = 50, min = 0, max = 100)),
-      shiny::column(2, shiny::sliderInput("G",   shiny::withMathJax("$$\\hspace{2cm} G_0$$"), value = 800, min = 0, max = 1600)),
-      shiny::column(1, shiny::sliderInput("k",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{k}$$"), value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
-      shiny::column(1, shiny::sliderInput("h",   shiny::withMathJax("$$\\hspace{1cm}\\textbf{h}$$"), value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
-      shiny::column(2, shiny::sliderInput("MP",  shiny::withMathJax("$$\\hspace{2cm}\\bar{M}/P$$"), value = 500, min = 0, max = 1000)) # oferta real de moeda
+      shiny::column(2, shiny::sliderInput("b", shiny::withMathJax("$$\\hspace{2cm}\\textbf{b}$$"), value = 50, min = 0, max = 100)),
+      shiny::column(2, shiny::sliderInput("G", shiny::withMathJax("$$\\hspace{2cm} G_0$$"), value = 800, min = 0, max = 1600)),
+      shiny::column(1, shiny::sliderInput("k", shiny::withMathJax("$$\\hspace{1cm}\\textbf{k}$$"), value = 0.25, min = 0, max = 1)), # sensibilidade da demanda por saldos reais em relacao ao nivel de renda # L= 0,25 Y - 62,5i
+      shiny::column(1, shiny::sliderInput("h", shiny::withMathJax("$$\\hspace{1cm}\\textbf{h}$$"), value = 62.5, min = 0, max = 100)), # sensibilidade da demanda por saldos reais em relacao a taxa de juros
+      shiny::column(2, shiny::sliderInput("MP", shiny::withMathJax("$$\\hspace{2cm}\\bar{M}/P$$"), value = 500, min = 0, max = 1000)) # oferta real de moeda
     ),
     shiny::tabsetPanel(
       shiny::tabPanel(
@@ -152,8 +151,9 @@ chart_IS_LM <- function() {
     # fazendo o mapa no ggplot do modelo de deslocamento:
     output$GrafTotal <- shiny::renderPlot({
       res$DATA2 |>
-      ggplot2::ggplot(
-        ggplot2::aes(x = vari, y = vari2, fill = ID, group = ID)) +
+        ggplot2::ggplot(
+          ggplot2::aes(x = vari, y = vari2, fill = ID, group = ID)
+        ) +
         ggplot2::geom_line(linewidth = 1.5) +
         ggplot2::geom_line(ggplot2::aes(colour = ID)) +
         ggplot2::labs(x = "Renda", y = "Taxa de juros") +
@@ -165,8 +165,9 @@ chart_IS_LM <- function() {
 
     output$Graindiv <- shiny::renderPlot({
       dplyr::filter(res$DATA2, ID %in% c("LM'", "IS'")) |>
-      ggplot2::ggplot(
-      ggplot2::aes(x = vari, y = vari2, fill = ID, group = ID)) +
+        ggplot2::ggplot(
+          ggplot2::aes(x = vari, y = vari2, fill = ID, group = ID)
+        ) +
         ggplot2::geom_line(linewidth = 1.5) +
         ggplot2::geom_line(ggplot2::aes(colour = ID)) +
         ggplot2::labs(x = "Renda", y = "Taxa de juros") +
@@ -183,5 +184,3 @@ chart_IS_LM <- function() {
   # Run the application
   shiny::shinyApp(ui, server)
 }
-
-
