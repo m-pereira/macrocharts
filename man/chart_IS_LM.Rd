@@ -7,8 +7,13 @@
 chart_IS_LM()
 }
 \value{
-a shiny app
+It returns a interactive \link[shiny]{shinyApp}
 }
 \description{
 Create a shiny app with IS-LM chart
+}
+\examples{
+\dontrun{
+chart_IS_LM()
+}
 }

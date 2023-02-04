@@ -1,7 +1,7 @@
 
 
 #' Create a shiny app with IS-LM chart
-#' @return a shiny app
+#' @return It returns a interactive \link[shiny]{shinyApp}
 #' @export
 #'
 #' @importFrom magrittr "%>%"
@@ -12,14 +12,24 @@
 #' @import shinydashboard
 #' @import ggthemes
 
-#'
+#' @examples
+#'\dontrun{
+#'chart_IS_LM()
+#'}
 chart_IS_LM <- function() {
+
+  # a workaound for warning about visible binding for global variable
+  vari <- vari2 <-ID <- NULL
+
+
+  # some multipliers used to chart
   time <- seq(from = .1,to = 2,by = .1)
-  # Define UI for application that draws a histogram
+
+  ### UI function  -------------------
   ui <- shiny::fluidPage(
     theme = shinythemes::shinytheme("cerulean"),
 
-    # Application title
+    # Application design
     shiny::titlePanel("Modelo macroeconomico IS-LM"),
     shiny::fluidRow(shiny::column(12, shiny::h4("Parametros do modelo IS-LM sem mudanca"))),
     shiny::fluidRow(
@@ -58,19 +68,19 @@ chart_IS_LM <- function() {
     )
   )
 
-  # Define server logic required to draw a histogram
+  ### Server function -------------------
   server <- function(input, output, session) {
     res <- shiny::reactiveValues()
 
     shiny::observe({
-      ### OBTENDO OS RESULTADOS DO MODELO
-      # modelo com alteracao
+      ### taking the inputs
+      # model with change
       res$RENDA <- (((input$I_0 + input$G) + ((input$b / input$h) * input$MP)) / ((1 - (input$c * (1 - input$t))) + ((input$b * input$k) / input$h)))
       res$JUROS <- ((1 / input$h) * ((input$k * (((input$I_0 + input$G) + ((input$b / input$h) * input$MP)) / ((1 - (input$c * (1 - input$t))) + ((input$b * input$k) / input$h)))) - input$MP))
-      # modelo sem alteracao:
+      # model without change
       res$RENDAS <- (((input$I_01 + input$G1) + ((input$b1 / input$h1) * input$MP1)) / ((1 - (input$c1 * (1 - input$t1))) + ((input$b1 * input$k1) / input$h1)))
       res$JUROSS <- ((1 / input$h1) * ((input$k1 * (((input$I_01 + input$G1) + ((input$b1 / input$h1) * input$MP1)) / ((1 - (input$c1 * (1 - input$t1))) + ((input$b1 * input$k1) / input$h1)))) - input$MP1))
-      # variacao renda:
+      # income change:
 
       res$TABLE <- data.frame(
         "Variavel" = c("Renda", "Juros", "c", "t", "I_0", "b", "G", "k", "h", "MP"),
@@ -113,29 +123,29 @@ chart_IS_LM <- function() {
           )
       )
 
+      ### IS-LM ------------------------------
 
-      ### FAZENDO OS GRAFICOS PARA OS MODELOS:
-      ## Fazendo para o modelo com alteracao:
-      # calculos que geram condicoes:
+      ## chart for model with change
+      ### calculations
       res$Renda <- (((input$I_0 + input$G) + ((input$b / input$h) * input$MP)) / ((1 - (input$c * (1 - input$t))) + ((input$b * input$k) / input$h)))
       res$Juros <- ((1 / input$h) * ((input$k * (((input$I_0 + input$G) + ((input$b / input$h) * input$MP)) / ((1 - (input$c * (1 - input$t))) + ((input$b * input$k) / input$h)))) - input$MP))
-      # calculo dos intervalos:
+      ### estimating breaks:
       res$eixox <- res$Renda * time
       res$eixoy <- res$Juros * time
-      # valores para a curva:
+      ### values with curve:
       res$IS <- (((input$I_0 + input$G) / (1 - (input$c * (1 - input$t))) - ((input$b * res$eixoy) / (1 - (input$c * (1 - input$t))))))
       res$LM <- ((res$eixox * (input$k / input$h)) - (input$MP / input$h))
-      ## Fazendo para o modelo sem alteracao:
-      # calculos que geram condicoes:
+      ## chart the model without change:
+      ### calculations:
       res$RendaS <- (((input$I_01 + input$G1) + ((input$b1 / input$h1) * input$MP1)) / ((1 - (input$c1 * (1 - input$t1))) + ((input$b1 * input$k1) / input$h1)))
       res$JurosS <- ((1 / input$h1) * ((input$k1 * (((input$I_01 + input$G1) + ((input$b1 / input$h1) * input$MP1)) / ((1 - (input$c1 * (1 - input$t1))) + ((input$b1 * input$k1) / input$h1)))) - input$MP1))
-      # calculo dos intervalos:
+      ### estimating breaks:
       res$eixoxS <- res$RendaS * time
       res$eixoyS <- res$JurosS * time
-      # valores para a curva:
+      ### values the curve:
       res$ISS <- (((input$I_01 + input$G1) / (1 - (input$c1 * (1 - input$t1))) - ((input$b1 * res$eixoyS) / (1 - (input$c1 * (1 - input$t1))))))
       res$LMS <- ((res$eixoxS * (input$k1 / input$h1)) - (input$MP1 / input$h1))
-      ## montando o data frame:
+      ### creating the data frame used for ggplot:
       res$DTLM <- data.frame("vari" = c(res$eixox), "vari2" = c(res$LM), "ID" = "LM'")
       res$DTIS <- data.frame("vari" = c(res$IS), "vari2" = c(res$eixoy), "ID" = "IS'")
       res$DTLMS <- data.frame("vari" = c(res$eixoxS), "vari2" = c(res$LMS), "ID" = "LM")
@@ -145,9 +155,10 @@ chart_IS_LM <- function() {
       res$DATA2 <- dplyr::bind_rows(res$DATA1, res$DTISS)
     })
 
-    # aqui nao mexer
+    # render table  ------------------------
     output$TABLE <- shiny::renderDataTable(res$TABLE)
 
+    # drawing the graph with displacement
     # fazendo o mapa no ggplot do modelo de deslocamento:
     output$GrafTotal <- shiny::renderPlot({
       res$DATA2 |>
