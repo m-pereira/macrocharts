@@ -27,7 +27,8 @@ devtools::install_github("m-pereira/macrocharts")
 
 ## Example
 
-This is a basic example which shows you how create a chart for IS-LM :
+This is a basic example which shows you how create a shiny app for
+IS-LM:
 
 ``` example
 ## load the package

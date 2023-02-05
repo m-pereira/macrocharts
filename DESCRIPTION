@@ -4,7 +4,7 @@ Title: Create a friendly macroeconomic charts
 Version: 0.1.0
 Author: Mateus Pereira <mateusmachadodepereira@gmail.com>, Ronaldo Torres <torresronaldobr@gmail.com>
 Maintainer: Mateus Pereira <mateusmachadodepereira@gmail.com>
-Description: This package allows you to create a theoretical charts easily,  our main goal is make easier teach macroeconomics to students, as example the “investment-savings” (IS) and “liquidity preference-money supply” that has a lot of  varieties, like open economy or closed economy. Our package help the visualization   of the impacts of variables. 
+Description: This package allows you to create a theoretical charts easily,  our main goal is make easier teach macroeconomics to students, as example the “investment-savings” (IS) and “liquidity preference-money supply” that has a lot of  varieties, like open economy or closed economy. Our package help the visualization of the impacts of variables. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -13,6 +13,7 @@ Imports:
     ggplot2,
     ggthemes,
     magrittr,
+    plotly,
     shiny,
     shinydashboard,
     shinythemes
